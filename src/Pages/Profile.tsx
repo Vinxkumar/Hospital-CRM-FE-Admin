@@ -1,0 +1,11 @@
+
+
+const Profile = () => {
+
+
+    return (
+        <>
+        
+        </>
+    );
+}
