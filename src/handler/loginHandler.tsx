@@ -12,6 +12,7 @@ const loginHandler = async (loginData: Login) => {
         localStorage.setItem("userName", response.data.userName);
         localStorage.setItem("userEmail", response.data.userEmail);
         localStorage.setItem("userPhone", response.data.userPhone);
+        localStorage.setItem("userRole", response.data.userRole);
     } catch (error) {
         console.error("Login failed:", error);
         throw error;
