@@ -1,7 +1,6 @@
 import React, {useState} from "react"
 import { navItems } from "../interface/navBar"
 import { IoSettings } from "react-icons/io5";
-import { Button } from "antd";
 import { logout } from "../utils/TokenVerifier";
 import { useNavigate } from "react-router-dom";
 import { IoMdLogOut } from "react-icons/io";
@@ -55,7 +54,7 @@ const HomeNavBar = () => {
 
             <div className="flex items-center justify-center gap-2">
                 <div className="flex items-center px-6" onMouseEnter={() => setProfileHover(true)} onMouseLeave={() => setProfileHover(false)}>
-                    <button className={`flex items-center justify-center gap-2  font-bold ${profileHover ? "text-gray-400 cursor-pointer" : "text-white"}`} >
+                    <button className={`flex items-center justify-center gap-2  font-bold ${profileHover ? "text-gray-400 cursor-pointer" : "text-white"}`} onClick={()=> navigate("/profile")}>
                     <span>{localStorage.getItem("userName")}</span>
                     </button>
                 </div>
