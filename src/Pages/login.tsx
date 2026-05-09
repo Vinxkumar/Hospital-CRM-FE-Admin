@@ -1,16 +1,27 @@
 import { Card, Form, Button, Input } from "antd";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Login } from "../types/signIn";
 import img from "../assets/background.jpg";
 import loginHandler from "../handler/loginHandler";
-import { Alert } from 'antd';
+import { Alert, message } from 'antd';
 import { isTokenNotValid } from "../utils/TokenVerifier";
 const login = () => {
     const [loginData, setLoginData] = useState<Login>({
         userEmail: "",
         password: "",
     })
+
+        const [messageApi, contextHolder] = message.useMessage();
+    const hasShown = useRef(false);
+    useEffect(() => {
+        if(hasShown.current) return;
+        messageApi.open({
+            type: 'success',
+            content: `Welcome ${localStorage.getItem("userName")} !`
+        });
+        hasShown.current = true;
+    }, [messageApi]);
 
     const navigate = useNavigate();
     const [loading , setLoading] = useState(false);
@@ -77,12 +88,11 @@ const login = () => {
             }} loading = {loading} onClick={() => {
                 setLoading(true);
                 if (isTokenNotValid(localStorage.getItem("token"))) {
-                  alert("Session expired. Please log in again.");
                   navigate("/login");
                 }
                 loginHandler(loginData).then(() => {
                     setLoading(false);
-                    <Alert title={`welcome ${localStorage.getItem("userName")}`} type="success" showIcon closable />
+                    contextHolder
                     navigate("/home");
                 }).catch(() => {
                     setLoading(false);
