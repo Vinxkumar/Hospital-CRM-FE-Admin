@@ -21,8 +21,9 @@ const HomeNavBar = () => {
     }
 
     return (
-        <nav className={`flex items-center justify-between p-4 m-6 bg-zinc-800 text-white shadow-lg rounded-full transition-all duration-300 ease-in-out ${
-            hover ? " w-240" : "w-225"
+        <nav
+         className={`flex items-center justify-between p-4 m-6 bg-zinc-800 text-white shadow-lg shadow-transparent rounded-full transition-all duration-300 ease-in-out ${
+            hover ? " w-240  shadow-white/50 shadow-md" : "w-225"
             } `} onMouseEnter={()=> setHover(true)} onMouseLeave={()=> setHover(false)}>
             <div className="px-4">
                 <ul className="flex space-x-2 gap-6">
