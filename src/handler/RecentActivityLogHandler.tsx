@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react"
+import api from "../Axios/Api"
+import type { Log } from "../types/Log"
 
-type Log = {
-createdAt: string
-  message: string
-  
-}
 
 export default function LogsTable() {
   const [logs, setLogs] = useState<Log[]>([])
@@ -14,9 +11,8 @@ export default function LogsTable() {
     const fetchLogs = async () => {
       setLoading(true)
       try {
-        const res = await fetch("/api/logs")
-        const data: Log[] = await res.json()
-        setLogs(data)
+        const res = await api.get("/admin/log")
+        setLogs(res.data as Log[])
       } finally {
         setLoading(false)
       }
@@ -27,27 +23,24 @@ export default function LogsTable() {
   if (loading) return <p className="text-white">Loading...</p>
 
   return (
-    <div className="overflow-x-auto rounded-xl bg-zinc-800 p-4 ">
+    <div className="overflow-x-auto rounded-xl bg-zinc-800 p-4">
       <table className="w-full text-sm text-white">
         <thead>
           <tr className="border-b border-zinc-600 text-zinc-400">
             <th className="py-2 text-left">Time</th>
             <th className="py-2 text-left">Message</th>
-            
           </tr>
         </thead>
         <tbody>
-          {logs.map(log => (
-            <tr key={log.createdAt} className="border-b border-zinc-700 hover:bg-zinc-700">
-              <td className="py-2">{log.createdAt}</td>
-              <td className="py-2">{log.message}</td>
+          {logs.map((log, index) => (
+            <tr
+              key={log.id ?? index}
+              className="border-b border-zinc-700 hover:bg-zinc-700"
+            >
               <td className="py-2 text-zinc-400">
-                {new Date(log.createdAt).toLocaleString()}
+                {new Date(log.timeStamp).toLocaleString()}
               </td>
-              <td className="py-2">{log.message}</td>
-              <td className="py-2 text-zinc-400">
-                {new Date(log.createdAt).toLocaleString()}
-              </td>
+              <td className="py-2">{log.log}</td>
             </tr>
           ))}
         </tbody>
