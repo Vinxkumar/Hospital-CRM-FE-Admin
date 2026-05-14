@@ -17,7 +17,6 @@ useEffect(() => {
 
   return (
     <div className="App">
-      <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<main>
@@ -27,7 +26,6 @@ useEffect(() => {
           </main>} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
-      </BrowserRouter>
     </div>
   )
 }
