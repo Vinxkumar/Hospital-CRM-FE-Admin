@@ -20,7 +20,11 @@ useEffect(() => {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/" element={<main>
+            <HomeNavBar scrollY={scrollY}/>
+            <HomePage/>
+            <Doctor/>
+          </main>} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
