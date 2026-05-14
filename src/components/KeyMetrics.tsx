@@ -1,8 +1,42 @@
 import {motion} from "motion/react"
 import KeyMetricsHandler from "../handler/KeyMetricsHandler";
-import { FaUserDoctor } from "react-icons/fa6";
-import { CiMedicalMask } from "react-icons/ci";
-import { FaSuitcaseMedical } from "react-icons/fa6";
+import { useEffect, useRef, useMemo } from "react";
+
+function randomPoints(n: number): number[] {
+  return Array.from({ length: n }, () => Math.random() * 100);
+}
+
+function Sparkline({ color = "#3b82f6" }: { color: string }) {
+  const pts = useMemo(() => randomPoints(12), []);
+  const w = 80,
+    h = 40;
+  const min = Math.min(...pts),
+    max = Math.max(...pts);
+  const range = max - min || 1;
+  const coords = pts.map((v, i) => ({
+    x: (i / (pts.length - 1)) * w,
+    y: h - ((v - min) / range) * (h - 4) - 2,
+  }));
+  const line = "M" + coords.map((p) => `${p.x},${p.y}`).join("L");
+
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`}>
+      <path
+        d={line}
+        fill="none"
+        stroke={color}
+        strokeWidth={1.8}
+        strokeLinecap="round"
+      />
+      <circle
+        cx={coords.at(-1)!.x}
+        cy={coords.at(-1)!.y}
+        r={2.5}
+        fill={color}
+      />
+    </svg>
+  );
+}
 const keyMetrics = () => {
     const metrics = KeyMetricsHandler();
     return (
