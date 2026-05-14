@@ -28,10 +28,10 @@ const InventoryHandler = () => {
 
     return(
         <>
-        <div className="overflow-x-auto rounded-xl bg-zinc-800 p-2">
+        <div className="overflow-x-auto rounded-xl bg-slate-800 p-2">
       <table className="w-full text-sm text-white">
         <thead>
-          <tr className="border-b border-zinc-600 text-zinc-400">
+          <tr className="border-b border-slate-600 text-slate-400">
             <th className="py-2 text-left">Id</th>
             <th className="py-2 text-left">Name</th>
             <th className="py-2 text-left">In Stock</th>
@@ -41,12 +41,12 @@ const InventoryHandler = () => {
           {inventory.map((item) => (
             <tr
               key={item.id}
-              className="border-b border-zinc-700 hover:bg-zinc-700"
+              className="border-b border-slate-700 hover:bg-slate-700"
             >
-                <td className="py-2 text-zinc-400">
+                <td className="py-2 text-slate-400">
                   {item.id}
                 </td>
-                <td className="py-2 text-zinc-400">
+                <td className="py-2 text-slate-400">
                   {item.name}
                 </td>
                 <td className="py-2">{item.inStock}</td>
