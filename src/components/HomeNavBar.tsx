@@ -4,12 +4,17 @@ import { IoSettings } from "react-icons/io5";
 import { logout } from "../utils/TokenVerifier";
 import { useNavigate } from "react-router-dom";
 import { IoMdLogOut } from "react-icons/io";
-const HomeNavBar = () => {
-    const [onClickItem, setOnClickItem] = useState<number | null>(null);
-    const [hover, setHover] = useState<boolean | null>(null);
-    const [buttonHover, setButtonHover] = useState<boolean>(false);
-    const [profileHover, setProfileHover] = useState<boolean>(false);
-    const [searchHover, setSearchHover] = useState<boolean>(false);
+import { motion } from "framer-motion";
+type ScrollPosition = {
+  scrollY: number;
+};
+
+const HomeNavBar = ({ scrollY }: ScrollPosition) => {
+  const [onClickItem, setOnClickItem] = useState<number | null>(null);
+  const [hover, setHover] = useState(false);
+  const [buttonHover, setButtonHover] = useState<boolean>(false);
+  const [profileHover, setProfileHover] = useState<boolean>(false);
+  const [searchHover, setSearchHover] = useState<boolean>(false);
 
     const navigate = useNavigate();
     const handleOnClick = (index: number) => {
