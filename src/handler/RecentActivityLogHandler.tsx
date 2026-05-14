@@ -23,10 +23,10 @@ export default function LogsTable() {
   if (loading) return <p className="text-white">Loading...</p>
 
   return (
-    <div className="overflow-x-auto rounded-xl bg-zinc-800 p-4">
+    <div className="overflow-x-auto rounded-xl bg-slate-800 p-4">
       <table className="w-full text-sm text-white">
         <thead>
-          <tr className="border-b border-zinc-600 text-zinc-400">
+          <tr className="border-b border-slate-600 text-slate-400">
             <th className="py-2 text-left">Time</th>
             <th className="py-2 text-left">Message</th>
           </tr>
@@ -35,9 +35,9 @@ export default function LogsTable() {
           {logs.map((log, index) => (
             <tr
               key={log.id ?? index}
-              className="border-b border-zinc-700 hover:bg-zinc-700"
+              className="border-b border-slate-700 hover:bg-slate-700"
             >
-              <td className="py-2 text-zinc-400">
+              <td className="py-2 text-slate-400">
                 {new Date(log.timeStamp).toLocaleString()}
               </td>
               <td className="py-2">{log.log}</td>
@@ -47,7 +47,7 @@ export default function LogsTable() {
       </table>
 
       {logs.length === 0 && (
-        <p className="text-center text-zinc-500 py-4">No logs found</p>
+        <p className="text-center text-slate-500 py-4">No logs found</p>
       )}
     </div>
   )
