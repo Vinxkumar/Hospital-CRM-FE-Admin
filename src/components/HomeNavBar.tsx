@@ -156,6 +156,3 @@ const HomeNavBar = ({ scrollY }: ScrollPosition) => {
   );
 };
 export default HomeNavBar;
-
-}
-export default HomeNavBar
