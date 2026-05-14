@@ -3,7 +3,13 @@ import './App.css'
 import Login from './Pages/login'
 import HomePage from './Pages/HomePage'
 import Profile from './Pages/Profile'
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import {Route, Routes } from "react-router-dom"
+import HomeNavBar from './components/HomeNavBar'
+import Doctor from './Pages/Doctor'
+import { useState, useEffect } from 'react'
+
+
+
 function App() {
 
   // In App.tsx Webpage component, add:
