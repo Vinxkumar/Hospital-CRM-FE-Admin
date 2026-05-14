@@ -1,5 +1,3 @@
-import HomeNavBar from "../components/HomeNavBar"
-import { motion } from "motion/react"
 import KeyMetrics from "../components/KeyMetrics"
 import RecentActivityLog from "../components/RecentActivityLog"
 import Inventory from "../components/Inventory"
