@@ -1,4 +1,4 @@
-import {motion} from "motion/react"
+import { motion } from "motion/react";
 import KeyMetricsHandler from "../handler/KeyMetricsHandler";
 import { useEffect, useRef, useMemo } from "react";
 
@@ -38,76 +38,109 @@ function Sparkline({ color = "#3b82f6" }: { color: string }) {
   );
 }
 const keyMetrics = () => {
-    const metrics = KeyMetricsHandler();
-    return (
+  const metrics = KeyMetricsHandler();
+  return (
     <motion.div
       initial={{ opacity: 0, scale: 0.5, x: -100 }}
       animate={{ opacity: 1, scale: 1, x: 0 }}
-      whileHover={{scale:1.01, boxShadow: "0 0 20px rgba(72, 187, 120, 0.5)" }}
-          transition={{
-        default: { duration: 0.5, delay: 0.1 },  
-        scale: { duration: 0.2 },                  
-        boxShadow: { duration: 0.2 }               
-    }}
-      className="flex flex-col gap-4 p-4 bg-zinc-800 rounded-2xl w-full h-54 "
+      whileHover={{
+        scale: 1.01,
+        boxShadow: "0 0 20px rgba(72, 187, 120, 0.5)",
+      }}
+      transition={{
+        default: { duration: 0.6, delay: 0.5 },
+        scale: { duration: 0.2 },
+        boxShadow: { duration: 0.2 },
+      }}
+      className=" group flex flex-col gap-4 p-4 bg-slate-800 border-2 border-slate-700 rounded-2xl w-full h-54 "
     >
-    <div>
-        <h2 className="text-md font-bold text-white">Key Metrics Overview</h2>
-        <div className="flex flex-col justify-col mt-2 ">
-            <div className="flex space-x-5 items-center ">
-                <div className="flex flex-col gap-4 space-x-8">
+      <div>
+        <motion.h2 className="relative text-md w-44 font-bold text-white">
+        
+            <span> Key Metrics Overview </span>
+            <motion.div
+      className="absolute -bottom-1 left-0 h-[2px] w-full origin-left scale-x-0 rounded-full bg-white transition-transform duration-200 ease-in-out group-hover:scale-x-100"
+    />
+        </motion.h2>
+        <div className="flex flex-col justify-col mt-2 pt-2">
+          <div className="flex space-x-5 items-center ">
+            <motion.div
+                initial={{ opacity: 0, scale: 0.5, z:10 }}
+              animate={{ opacity: 1, scale: 1, z:0}}
+              transition={{
+                default: { duration: 0.6, delay:0.8 },
+                scale: { duration: 0.2 },
+                boxShadow: { duration: 0.2 },
+              }} 
+        
+            className="flex flex-col gap-4 items-center w-64 h-38 rounded-2xl bg-slate-900 border border-slate-500 space-x-8 hover:border-green-500 transition-all ease-in-out duration-100">
+              <div className="flex gap-4 items-center">
+                <span className=" pt-2 text-sm font-bold text-white">
+                  Patients
+                </span>
+              </div>
 
-                    <div className="flex gap-4">
-
-                        <button className="flex items-center gap-4 px-4 py-2 text-white bg-green-500 rounded-xl transition-all duration-100 ease-in-out hover:bg-green-600">
-                            <CiMedicalMask className="w-12 h-12 text-white"/>
-                        </button>
-
-                        <span className=" pt-4 text-lg font-bold text-white">Total Patients</span>
-
-                    </div>
-
-                    <div>
-                        <span className="text-4xl px-22 py-12 font-bold text-white">{metrics.PatientTotalCount}</span>
-                    </div>
-
+              <div className="flex gap-4 items-center p-4 ">
+                <div className="flex gap-4">
+                  <span className="text-4xl   font-bold text-white">
+                    {metrics.PatientTotalCount}
+                  </span>
+                  <Sparkline color="#00FF00" />
                 </div>
-                <div className="flex gap-4 flex-col space-x-8">
-                    <div className="flex gap-4">
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1}}
+              transition={{
+                default: { duration: 0.6, delay:1.2 },
+                scale: { duration: 0.2 },
+                boxShadow: { duration: 0.2 },
+              }}
+              className="flex flex-col gap-4 items-center w-64 h-38 rounded-2xl bg-slate-900 border border-slate-500 space-x-8 hover:border-green-500"
+            >
+              <div className="flex gap-4 items-center">
+                <span className=" pt-2 text-sm font-bold text-white">
+                  Doctors
+                </span>
+              </div>
 
-                        <button className="flex items-center gap-4 px-4 py-2 text-white bg-green-500 rounded-xl transition-all duration-200 ease-in-out hover:bg-green-600">
-                            <FaUserDoctor className="w-12 h-12 text-white"/>
-                        </button>
+              <div className="flex gap-4 items-center p-4">
+                <span className="text-4xl   font-bold text-white">
+                  {metrics.DoctorTotalCount}
+                </span>
+                <Sparkline color="yellow" />
+              </div>
+            </motion.div>
+            <motion.div
+            
+                          initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1}}
+              transition={{
+                default: { duration: 0.6, delay:1.4 },
+                scale: { duration: 0.2 },
+                boxShadow: { duration: 0.2 },
+              }}
+            
+            className="flex flex-col gap-4 items-center w-64 h-38 rounded-2xl bg-slate-900 border border-slate-500 space-x-8 hover:border-green-500">
+              <div className="flex gap-4 items-center">
+                <span className=" pt-2 text-sm font-bold text-white">
+                  Medicine
+                </span>
+              </div>
 
-                        <span className=" pt-4 text-lg font-bold text-white">Total Doctors</span>
-
-                    </div>
-
-                    <div>
-                        <span className="text-4xl px-22 py-12 font-bold text-white">{metrics.DoctorTotalCount}</span>
-                    </div>
-                </div>
-                <div className="flex gap-4 flex-col ">
-                    <div className="flex gap-4">
-
-                        <button className="flex items-center gap-4 px-4 py-2 text-white bg-green-500 rounded-xl transition-all duration-200 ease-in-out hover:bg-green-600">
-                            <FaSuitcaseMedical className="w-12 h-12 text-white"/>
-                        </button>
-
-                        <span className=" pt-4 text-lg font-bold text-white">Total Medicine</span>
-
-                    </div>
-
-                    <div>
-                        <span className="text-4xl px-22 py-12 font-bold text-white">{metrics.MedicineTotalCount}</span>
-                    </div>
-                </div>
-            </div>
+              <div className="flex gap-4 items-center p-4">
+                <span className="text-4xl   font-bold text-white">
+                  {metrics.MedicineTotalCount}
+                </span>
+                <Sparkline color="blue" />
+              </div>
+            </motion.div>
+          </div>
         </div>
-
-    </div>
+      </div>
     </motion.div>
-    );
-}
+  );
+};
 
 export default keyMetrics;
