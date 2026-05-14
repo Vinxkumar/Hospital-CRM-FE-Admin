@@ -16,43 +16,78 @@ const HomeNavBar = ({ scrollY }: ScrollPosition) => {
   const [profileHover, setProfileHover] = useState<boolean>(false);
   const [searchHover, setSearchHover] = useState<boolean>(false);
 
-    const navigate = useNavigate();
-    const handleOnClick = (index: number) => {
-        if(onClickItem === index) {
-            setOnClickItem(null);
-        } else {
-            setOnClickItem(index);
-        }
+  const navigate = useNavigate();
+  const handleOnClick = (index: number) => {
+    if (onClickItem === index) {
+      setOnClickItem(null);
+    } else {
+      setOnClickItem(index);
     }
+  };
 
-    return (
-        <nav
-         className={`flex items-center justify-between p-4 m-6 bg-zinc-800 text-white shadow-lg shadow-transparent rounded-full transition-all duration-300 ease-in-out ${
-            hover ? " w-240  shadow-green-500 shadow-md" : "w-225"
-            } `} onMouseEnter={()=> setHover(true)} onMouseLeave={()=> setHover(false)}>
-            <div className="px-4">
-                <ul className="flex space-x-2 gap-6">
-                    {navItems.map((item, index) => (
-                        <li
-                            key = {index}
-                            className= "relative cursor-pointer"
-                        >
-                            <span className="hover:text-gray-400" onClick={() => handleOnClick(index)}>
-                            {item.lable}
-                            </span>
-                            {item.child && onClickItem === index && hover && (
-                                <ul className="absolute top-full left-0 mt-2 w-40 bg-zinc-800 text-white shadow-lg rounded-lg border border-black">
-                                    {item.child.map((childItem, childIndex) => (
-                                        <li key={childIndex} className="p-2 hover:bg-black rounded-lg">
-                                            {childItem.lable}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </li>
-                    ))} 
+  return (
+    <motion.nav
+                initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{           
+          default: { duration: 0.4, delay: 0.2 },
+          scale: { duration: 0.2 },
+          boxShadow: { duration: 0.2 }, }}
+      className={`flex flex-2 fixed items-center justify-between  bg-slate-800  text-white shadow-lg   ${
+        scrollY > 25
+          ? `flex item-center w-240 shadow-md z-45 rounded-full transition-all duration-300 ease-in-out border-2 border-slate-700 p-2 m-4 h-12 ${hover ? "shadow-green-500 w-250" : "shadow-none"}`
+          : "w-full p-4 h-16  transition-all ease-out duration-300"
+      }
+             `}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      <div className="px-4">
+        <ul className="flex space-x-2 gap-6">
+          {navItems.map((item, index) => (
+            <motion.li
+              key={index}
+              className="relative cursor-pointer"
+              initial="rest"
+              whileHover="hover"
+            >
+              <span
+                className="hover:text-gray-400"
+                onClick={() => handleOnClick(index)}
+              >
+                {item.lable}
+              </span>
+              <motion.div
+                className="absolute -bottom-1 left-0 h-0.5 w-full origin-left rounded-full bg-white"
+                variants={{
+                  rest: {
+                    scaleX: 0,
+                  },
+                  hover: {
+                    scaleX: 1,
+                  },
+                }}
+                transition={{
+                  duration: 0.25,
+                  ease: "easeInOut",
+                }}
+              />
+              {item.child && onClickItem === index && hover && (
+                <ul className="absolute top-full left-0 mt-2 w-40 bg-zinc-800 text-white shadow-lg rounded-lg border border-black">
+                  {item.child.map((childItem, childIndex) => (
+                    <li
+                      key={childIndex}
+                      className="p-2 hover:bg-black rounded-lg"
+                    >
+                      {childItem.lable}
+                    </li>
+                  ))}
                 </ul>
-            </div>
+              )}
+            </motion.li>
+          ))}
+        </ul>
+      </div>
 
             <div className="flex items-center justify-center" onMouseEnter={() => setSearchHover(true)} onMouseLeave={() => setSearchHover(false)}>
                 <input type="text" placeholder="Search..." className={`px-4 py-2 h-8 rounded-full bg-zinc-700 text-white focus:outline-none focus:ring-1 focus:ring-blue-200  transition-all ease-in-out duration-200 ${searchHover ? "w-72" : "w-40"}`} />
