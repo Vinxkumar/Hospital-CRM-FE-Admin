@@ -1,4 +1,3 @@
-import React from 'react'
 import './App.css'
 import Login from './Pages/login'
 import HomePage from './Pages/HomePage'
