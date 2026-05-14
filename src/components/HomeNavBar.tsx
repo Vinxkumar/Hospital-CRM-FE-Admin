@@ -1,5 +1,5 @@
-import {useState} from "react"
-import { navItems } from "../interface/navBar"
+import { useState } from "react";
+import { navItems } from "../interface/navBar";
 import { IoSettings } from "react-icons/io5";
 import { logout } from "../utils/TokenVerifier";
 import { useNavigate } from "react-router-dom";
