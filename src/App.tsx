@@ -5,6 +5,16 @@ import HomePage from './Pages/HomePage'
 import Profile from './Pages/Profile'
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 function App() {
+
+  // In App.tsx Webpage component, add:
+const [scrollY, setScrollY] = useState(0);
+
+useEffect(() => {
+  const handleScroll = () => setScrollY(window.scrollY);
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+
   return (
     <div className="App">
       <BrowserRouter>
